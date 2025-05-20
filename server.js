@@ -12,7 +12,7 @@ app.get('/', (req, res) => {
 });
 
 cron.schedule('*/14 * * * *', () => {
-    https.get(process.env.RENDER_URL || 'https://your-render-app.onrender.com', (res) => {
+    https.get(process.env.RENDER_URL || 'https://comp2537-assign3.onrender.com', (res) => {
         console.log(`Pinged server at ${new Date().toISOString()}: Status ${res.statusCode}`);
     }).on('error', (err) => {
         console.error(`Ping error: ${err.message}`);
