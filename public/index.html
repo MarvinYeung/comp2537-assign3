@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokémon Memory Game</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: white;
+            color: black;
+        }
+        body.dark {
+            background-color: #2d3748;
+            color: white;
+        }
+        .game-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .card {
+            width: 90px;
+            height: 130px;
+            perspective: 1000px;
+            margin: 5px;
+            display: inline-block;
+        }
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.5s;
+            transform-style: preserve-3d;
+        }
+        .card:hover {
+            cursor: pointer;
+        }
+        .card.flipped .card-inner {
+            transform: rotateY(180deg);
+        }
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        .card-front {
+            transform: rotateY(180deg);
+            background: white;
+        }
+        .card-back {
+            background: linear-gradient(to bottom, #3b4cca, #ffcb05), url('https://tcg.pokemon.com/assets/images/card-back.jpg') center/cover;
+            background-blend-mode: overlay;
+        }
+        body.dark .card-back {
+            background: linear-gradient(to bottom, #2a3478, #b89c04), url('https://tcg.pokemon.com/assets/images/card-back.jpg') center/cover;
+            background-blend-mode: overlay;
+        }
+        #game-board {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+        }
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        select, button {
+            padding: 8px 12px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        body.dark select, 
+        body.dark button:not(.btn-primary):not(.btn-danger):not(.btn-success) {
+            background-color: #4a5568;
+            color: white;
+            border-color: #718096;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1 class="text-center mb-4">Pokémon Memory Game</h1>
+        <div id="status" class="text-center mb-4"></div>
+        <div class="controls">
+            <select id="difficulty">
+                <option value="easy">Easy (10 pairs, 60s)</option>
+                <option value="medium">Medium (15 pairs, 90s)</option>
+                <option value="hard">Hard (20 pairs, 120s)</option>
+            </select>
+            <button id="theme">Toggle Dark Mode</button>
+            <button id="start" class="btn btn-primary">Start</button>
+            <button id="reset" class="btn btn-danger">Reset</button>
+            <button id="powerup" class="btn btn-success" disabled>Power-Up</button>
+        </div>
+        <div id="game-board"></div>
+        <div id="message" class="text-center mt-4 fs-3 fw-bold"></div>
+    </div>
+    <script src="/script.js"></script>
+</body>
+</html>
